@@ -1,32 +1,36 @@
 import 'dart:io';
 
 void main() {
+  double harga = 20000;
   double diskon;
-  double toga;
+  double totalPembayaran;
   double kembali;
 
   stdout.write('Masukan Jumlah Belanja Anda : ');
   double belanja = double.parse(stdin.readLineSync()!);
+  double totalBelanja = belanja * harga;
 
-  print('Apakah kamu member (Y/T || y/t) :');
+  print('Apakah kamu member (Y) :');
   String member = stdin.readLineSync()!;
 
-  if (member == 'y' || member == 'Y') {
-    if (belanja > 500000) {
-      diskon = 0.15 * belanja;
+  if (member == 'Y' || member == 'y') {
+    if (totalBelanja > 500000) {
+      diskon = 0.15 * totalBelanja;
     } else {
-      diskon = 0.1 * belanja;
+      diskon = 0.1 * totalBelanja;
     }
   } else {
-    diskon = 0.05 * belanja;
+    diskon = 0;
+    print("Anda tidak mendapatkan diskon");
   }
-  toga = belanja - diskon;
-  print('Jumlah Belanja Anda Sebesar Rp. ${belanja}');
-  print('Anda Mendapatkan Diskon Sebesar Rp. ${diskon}');
-  print('Total harga yang harus dibayar ${toga}');
 
-  stdout.write('Jumlah pembayaran anda Rp. ');
-  double jubay = double.parse(stdin.readLineSync()!);
-  kembali = jubay - toga;
-  print('Total Kembalian anda Rp. ${kembali}');
+  totalPembayaran = totalBelanja - diskon;
+  print("Total Belanja anda sebesar Rp. $totalBelanja");
+  print("Diskon yang anda dapatkan sebesar Rp. $diskon");
+  print('Total Pembayaran yang harus dibayar sebesar Rp. $totalPembayaran');
+
+  stdout.write('Masukan Jumlah Uang : ');
+  double uang = double.parse(stdin.readLineSync()!);
+  kembali = uang - totalPembayaran;
+  print('Kembalian : $kembali');
 }
